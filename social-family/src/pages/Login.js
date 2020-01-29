@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import AppIcon from "../images/fam.jpg";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 /* MUI */
@@ -11,6 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+
+/* REDUX */
+
+import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
 
 const styles = {
   form: {
@@ -36,32 +39,24 @@ const styles = {
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  //  const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
 
   const handleSubmit = e => {
     e.preventDefault();
-    setLoading(true);
+
     const userData = {
       email,
       password
     };
-    axios
-      .post(
-        `https://us-central1-socialfamily-9d867.cloudfunctions.net/api/login`,
-        userData
-      )
-      .then(res => {
-        console.log(res.data);
-        localStorage.setItem("FbIdToken", `Bearer ${res.data.token}`);
-        setLoading(false);
-        props.history.push("/");
-      })
-      .catch(err => {
-        setError(err.response.data);
-        setLoading(false);
-      });
+    props.loginUser(userData, props.history);
   };
+
+  useEffect(() => {
+    if (props.UI.error) {
+      setError(props.UI.error);
+    }
+  });
 
   let handleEmailChange = e => {
     e.preventDefault();
@@ -73,7 +68,10 @@ function Login(props) {
     setPassword(e.target.value);
   };
 
-  const { classes } = props;
+  const {
+    classes,
+    UI: { loading }
+  } = props;
 
   return (
     <Grid container className={classes.form}>
@@ -144,7 +142,22 @@ function Login(props) {
 }
 
 Login.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(Login);
+const mapStateToProps = state => ({
+  user: state.user,
+  UI: state.UI
+});
+
+const mapActionsToProps = {
+  loginUser
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(Login));

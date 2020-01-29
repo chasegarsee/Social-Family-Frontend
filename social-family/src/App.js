@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import jwtDecode from "jwt-decode";
 
+/* REDUX */
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 /* MUI */
 
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
@@ -61,26 +65,28 @@ if (token) {
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <Router>
-        <Navbar />
-        <div className="container">
-          <Switch>
-            <Route exact path="/" component={home} />
-            <AuthRoute
-              exact
-              path="/signup"
-              component={signup}
-              authenticated={authenticated}
-            />
-            <AuthRoute
-              exact
-              path="/login"
-              component={login}
-              authenticated={authenticated}
-            />
-          </Switch>
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Navbar />
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={home} />
+              <AuthRoute
+                exact
+                path="/signup"
+                component={signup}
+                authenticated={authenticated}
+              />
+              <AuthRoute
+                exact
+                path="/login"
+                component={login}
+                authenticated={authenticated}
+              />
+            </Switch>
+          </div>
+        </Router>
+      </Provider>
     </MuiThemeProvider>
   );
 }
