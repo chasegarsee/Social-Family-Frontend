@@ -53,6 +53,7 @@ function Login(props) {
       )
       .then(res => {
         console.log(res.data);
+        localStorage.setItem("FbIdToken", `Bearer ${res.data.token}`);
         setLoading(false);
         props.history.push("/");
       })

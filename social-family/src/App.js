@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import jwtDecode from "jwt-decode";
 
 /* MUI */
 
@@ -15,6 +16,7 @@ import login from "./pages/Login";
 
 /* COMPONENTS */
 import Navbar from "./components/Navbar";
+import AuthRoute from "./util/AuthRoute";
 
 const theme = createMuiTheme({
   palette: {
@@ -22,8 +24,39 @@ const theme = createMuiTheme({
     secondary: {
       main: "#2962ff"
     }
+  },
+  form: {
+    textAlign: "center"
+  },
+  textField: {
+    margin: "5px auto"
+  },
+  button: {
+    marginTop: 20,
+    position: "relative"
+  },
+  customError: {
+    color: "red",
+    fontSize: "0.8rem",
+    marginTop: 10
+  },
+  progress: {
+    position: "absolute"
   }
 });
+
+let authenticated;
+
+const token = localStorage.FbIdToken;
+if (token) {
+  const decodedToken = jwtDecode(token);
+  if (decodedToken.exp * 1000 < Date.now()) {
+    window.location.href = "/login";
+    authenticated = false;
+  } else {
+    authenticated = true;
+  }
+}
 
 function App() {
   return (
@@ -33,8 +66,18 @@ function App() {
         <div className="container">
           <Switch>
             <Route exact path="/" component={home} />
-            <Route exact path="/signup" component={signup} />
-            <Route exact path="/login" component={login} />
+            <AuthRoute
+              exact
+              path="/signup"
+              component={signup}
+              authenticated={authenticated}
+            />
+            <AuthRoute
+              exact
+              path="/login"
+              component={login}
+              authenticated={authenticated}
+            />
           </Switch>
         </div>
       </Router>
