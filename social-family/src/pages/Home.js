@@ -9,7 +9,9 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get("/posts")
+      .get(
+        "https://us-central1-socialfamily-9d867.cloudfunctions.net/api/posts"
+      )
       .then(res => {
         console.log(res.data);
         setPosts(res.data);
@@ -18,9 +20,11 @@ export default function Home() {
   }, []);
 
   let recentPostMarkup = posts ? (
-    posts.map(post => <Post post={post} />)
+    posts.map(post => <Post key={post.postId} post={post} />)
   ) : (
-    <p>Loading...</p>
+    <div>
+      <p>Loading...</p>
+    </div>
   );
 
   return (
