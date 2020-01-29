@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import AppIcon from "../images/fam.jpg";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 /* MUI */
@@ -11,6 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+
+/* REDUX */
+
+import { connect } from "react-redux";
+import { signupUser } from "../redux/actions/userActions";
 
 const styles = {
   form: {
@@ -38,34 +41,25 @@ function Signup(props) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [handle, setHandle] = useState("");
-  const [loading, setLoading] = useState(false);
+  //const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
 
   const handleSubmit = e => {
     e.preventDefault();
-    setLoading(true);
     const newUserData = {
       email,
       password,
       confirmPassword,
       handle
     };
-    axios
-      .post(
-        `https://us-central1-socialfamily-9d867.cloudfunctions.net/api/signup`,
-        newUserData
-      )
-      .then(res => {
-        console.log(res.data);
-        localStorage.setItem("FbIdToken", `Bearer ${res.data.token}`);
-        setLoading(false);
-        props.history.push("/");
-      })
-      .catch(err => {
-        setError(err.response.data);
-        setLoading(false);
-      });
+    props.signupUser(newUserData, props.history);
   };
+
+  useEffect(() => {
+    if (props.UI.error) {
+      setError(props.UI.error);
+    }
+  });
 
   let handleEmailChange = e => {
     e.preventDefault();
@@ -87,7 +81,10 @@ function Signup(props) {
     setConfirmPassword(e.target.value);
   };
 
-  const { classes } = props;
+  const {
+    classes,
+    UI: { loading }
+  } = props;
 
   return (
     <Grid container className={classes.form}>
@@ -181,7 +178,21 @@ function Signup(props) {
 }
 
 Signup.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+  signupUser: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(Signup);
+const mapStateToProps = state => ({
+  user: state.user,
+  UI: state.UI
+});
+
+// const mapActionsToProps = {
+//   signupUser
+// };
+
+export default connect(mapStateToProps, { signupUser })(
+  withStyles(styles)(Signup)
+);
