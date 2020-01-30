@@ -21,7 +21,7 @@ const styles = {
 
 function DeletePost(props) {
   const [open, setOpen] = useState(false);
-  const { classes, deletePost } = props;
+  const { classes } = props;
 
   const handleOpen = () => {
     setOpen(true);
@@ -32,7 +32,7 @@ function DeletePost(props) {
   };
 
   const handleDeletePost = () => {
-    deletePost(props.postId);
+    props.deletePost(props.postId);
     setOpen(false);
   };
 
