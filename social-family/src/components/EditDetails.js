@@ -15,11 +15,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 import MyButton from "../util/MyButton";
 
-const styles = theme => ({
+const styles = {
   button: {
     float: "right"
   }
-});
+};
 
 function EditDetails(props) {
   const [bio, setBio] = useState("");
