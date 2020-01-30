@@ -1,30 +1,55 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Grid from "@material-ui/core/Grid";
-
+import { connect } from "react-redux";
+import { getPosts } from "../redux/actions/dataActions";
+import PropTypes from "prop-types";
 import Post from "../components/Post";
 import Profile from "../components/Profile";
 
-export default function Home() {
-  const [posts, setPosts] = useState([]);
+/* MUI */
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Grid from "@material-ui/core/Grid";
+import withStyles from "@material-ui/core/styles/withStyles";
 
+const styles = theme => ({
+  profileCenter: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 300
+  },
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2)
+    }
+  }
+});
+
+function Home(props) {
+  const { classes } = props;
+  const [progress, setProgress] = useState(0);
   useEffect(() => {
-    axios
-      .get(
-        "https://us-central1-socialfamily-9d867.cloudfunctions.net/api/posts"
-      )
-      .then(res => {
-        console.log(res.data);
-        setPosts(res.data);
-      })
-      .catch(err => console.log(err));
+    function tick() {
+      setProgress(oldProgress => (oldProgress >= 100 ? 0 : oldProgress + 1));
+    }
+
+    const timer = setInterval(tick, 20);
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
-  let recentPostMarkup = posts ? (
+  useEffect(() => {
+    props.getPosts();
+  }, []);
+
+  const { posts, loading } = props.data;
+
+  let recentPostMarkup = !loading ? (
     posts.map(post => <Post key={post.postId} post={post} />)
   ) : (
-    <div>
-      <p>Loading...</p>
+    <div className={classes.root}>
+      <LinearProgress color="secondary" />
     </div>
   );
 
@@ -39,3 +64,14 @@ export default function Home() {
     </Grid>
   );
 }
+
+Home.propTypes = {
+  getPosts: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  data: state.data
+});
+
+export default connect(mapStateToProps, { getPosts })(withStyles(styles)(Home));

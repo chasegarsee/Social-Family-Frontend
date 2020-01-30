@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
@@ -78,7 +78,7 @@ const styles = theme => ({
 });
 
 function Profile(props) {
-  const [progress, setProgress] = React.useState(0);
+  const [progress, setProgress] = useState(0);
   const {
     classes,
     user: {
@@ -88,7 +88,7 @@ function Profile(props) {
     }
   } = props;
 
-  React.useEffect(() => {
+  useEffect(() => {
     function tick() {
       // reset when reaching 100%
       setProgress(oldProgress => (oldProgress >= 100 ? 0 : oldProgress + 1));

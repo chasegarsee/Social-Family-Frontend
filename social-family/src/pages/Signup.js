@@ -59,7 +59,7 @@ function Signup(props) {
     if (props.UI.error) {
       setError(props.UI.error);
     }
-  });
+  }, [props.UI.error]);
 
   let handleEmailChange = e => {
     e.preventDefault();

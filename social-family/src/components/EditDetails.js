@@ -15,11 +15,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 import MyButton from "../util/MyButton";
 
-const styles = theme => ({
+const styles = {
   button: {
     float: "right"
   }
-});
+};
 
 function EditDetails(props) {
   const [bio, setBio] = useState("");
@@ -27,7 +27,7 @@ function EditDetails(props) {
   const [location, setLocation] = useState("");
   const [open, setOpen] = useState(false);
 
-  const { classes } = props;
+  const { classes, credentials } = props;
 
   const mapUserDetailsToState = credentials => {
     setBio(credentials.bio ? credentials.bio : "");
@@ -36,7 +36,6 @@ function EditDetails(props) {
   };
 
   useEffect(() => {
-    const { credentials } = props;
     mapUserDetailsToState(credentials);
   }, []);
 
