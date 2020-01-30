@@ -40,7 +40,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         likes: [
-          state.likes,
+          ...state.likes,
           {
             userHandle: state.credentials.handle,
             postId: action.payload.postId
