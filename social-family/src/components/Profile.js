@@ -2,23 +2,36 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
+import EditDetails from "./EditDetails";
 /*MUI */
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 import MuiLink from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+import EditIcon from "@material-ui/icons/Edit";
+import Tooltip from "@material-ui/core/Tooltip";
+import CircularProgress from "@material-ui/core/CircularProgress";
 /*ICONS */
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
+import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 /* REDUX */
 import { connect } from "react-redux";
+import { logoutUser, uploadImage } from "../redux/actions/userActions";
 
 const styles = theme => ({
   paper: {
     padding: 20
+  },
+  profileCenter: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: 300
   },
   profile: {
     "& .image-wrapper": {
@@ -65,6 +78,7 @@ const styles = theme => ({
 });
 
 function Profile(props) {
+  const [progress, setProgress] = React.useState(0);
   const {
     classes,
     user: {
@@ -74,12 +88,50 @@ function Profile(props) {
     }
   } = props;
 
+  React.useEffect(() => {
+    function tick() {
+      // reset when reaching 100%
+      setProgress(oldProgress => (oldProgress >= 100 ? 0 : oldProgress + 1));
+    }
+
+    const timer = setInterval(tick, 20);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  const handleImageChange = e => {
+    const image = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", image, image.name);
+    props.uploadImage(formData);
+  };
+  const handleEditPhoto = () => {
+    const fileInput = document.getElementById("imageInput");
+    fileInput.click();
+  };
+
+  const handleLogout = () => {
+    props.logoutUser();
+  };
+
   let profileMarkup = !loading ? (
     authenticated ? (
       <Paper className={classes.paper}>
         <div className={classes.profile}>
-          <div className="profile-image">
-            <img scr={imageUrl} alt="profile" />
+          <div className="image-wrapper">
+            <img src={imageUrl} alt="profile" className="profile-image" />
+            <input
+              type="file"
+              id="imageInput"
+              onChange={handleImageChange}
+              hidden="hidden"
+            />
+            <Tooltip title="Edit Profile Photo">
+              <IconButton onClick={handleEditPhoto} className="button">
+                <EditIcon color="primary" />
+              </IconButton>
+            </Tooltip>
           </div>
           <hr />
           <div className="profile-details">
@@ -113,6 +165,12 @@ function Profile(props) {
             <CalendarToday color="primary" />{" "}
             <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
           </div>
+          <Tooltip title="Logout" placement="top">
+            <IconButton onClick={handleLogout}>
+              <KeyboardReturn color="primary" />
+            </IconButton>
+          </Tooltip>
+          <EditDetails />
         </div>
       </Paper>
     ) : (
@@ -121,7 +179,7 @@ function Profile(props) {
           No profile found, please login again
           <div className={classes.buttons}>
             <Button
-              varient="contained"
+              variant="contained"
               color="primary"
               component={Link}
               to="/login"
@@ -129,7 +187,7 @@ function Profile(props) {
               Login
             </Button>
             <Button
-              varient="contained"
+              variant="contained"
               color="secondary"
               component={Link}
               to="/signup"
@@ -141,7 +199,14 @@ function Profile(props) {
       </Paper>
     )
   ) : (
-    <p>loading...</p>
+    <div className={classes.profileCenter}>
+      <CircularProgress
+        className={classes.CircularProgress}
+        variant="determinate"
+        value={progress}
+        size={100}
+      />
+    </div>
   );
   return profileMarkup;
 }
@@ -150,9 +215,16 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-Profile.PropTypes = {
+const mapActionsToProps = { logoutUser, uploadImage };
+
+Profile.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  uploadImage: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(Profile));
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(Profile));
