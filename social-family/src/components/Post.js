@@ -98,7 +98,7 @@ function Post(props) {
         {likeButton}
         <span>{likeCount} Likes</span>
         <MyButton tip="Comments">
-          <ChatIcon color="primary" />
+          <ChatIcon color="secondary" />
         </MyButton>
         <span>{commentCount} Comments</span>
       </CardContent>
