@@ -6,7 +6,6 @@ import Post from "../components/Post";
 import Profile from "../components/Profile";
 
 /* MUI */
-import CircularProgress from "@material-ui/core/CircularProgress";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -28,8 +27,8 @@ const styles = theme => ({
 
 function Home(props) {
   const { classes } = props;
-  const [progress, setProgress] = React.useState(0);
-  React.useEffect(() => {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
     function tick() {
       setProgress(oldProgress => (oldProgress >= 100 ? 0 : oldProgress + 1));
     }
@@ -39,6 +38,7 @@ function Home(props) {
       clearInterval(timer);
     };
   }, []);
+
   useEffect(() => {
     props.getPosts();
   }, []);
