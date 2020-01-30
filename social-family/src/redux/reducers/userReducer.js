@@ -4,6 +4,7 @@ import {
   CLEAR_ERRORS,
   LOADING_UI,
   LIKE_POST,
+  UNLIKE_POST,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   LOADING_USER
@@ -47,7 +48,7 @@ export default function(state = initialState, action) {
           }
         ]
       };
-    case LIKE_POST:
+    case UNLIKE_POST:
       return {
         ...state,
         likes: state.likes.filter(like => like.postId !== action.payload.postId)
