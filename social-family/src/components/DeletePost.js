@@ -14,6 +14,11 @@ import { connect } from "react-redux";
 import { deletePost } from "../redux/actions/dataActions";
 
 const styles = {
+  deleteButton: {
+    position: "absolute",
+    left: "90%",
+    top: 0
+  },
   deleteIcon: {
     color: "#e36107"
   }
