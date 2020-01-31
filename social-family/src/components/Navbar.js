@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import MyButton from "../util/MyButton";
 
 import { Link } from "react-router-dom";
+import PostPost from "./PostPost";
 
 /* REDUX */
 import { connect } from "react-redux";
@@ -13,9 +14,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 
 /* ICON */
-import AddIcon from "@material-ui/icons/Add";
+
 import HomeIcon from "@material-ui/icons/Home";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import CreatePost from "./CreatePost";
 
 function Navbar(props) {
   const { authenticated } = props;
@@ -24,9 +26,7 @@ function Navbar(props) {
       <Toolbar className="nav-container">
         {authenticated ? (
           <Fragment>
-            <MyButton tip="Create A Post!">
-              <AddIcon />
-            </MyButton>
+            <CreatePost />
             <Link to="/">
               <MyButton tip="Home">
                 <HomeIcon />

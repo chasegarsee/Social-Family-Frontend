@@ -30,7 +30,8 @@ const theme = createMuiTheme({
     primary: teal,
     secondary: {
       main: "#2962ff"
-    }
+    },
+    thirdary: "#ab003c"
   },
   form: {
     textAlign: "center"

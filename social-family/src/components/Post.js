@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import MyButton from "../util/MyButton";
+import DeletePost from "./DeletePost";
 
 /* REDUX */
 import { connect } from "react-redux";
@@ -16,13 +18,13 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import MyButton from "../util/MyButton";
 import ChatIcon from "@material-ui/icons/Chat";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 const styles = {
   card: {
+    position: "relative",
     display: "flex",
     marginBottom: 20
   },
@@ -52,8 +54,19 @@ function Post(props) {
   };
   const {
     classes,
-    post: { body, createdAt, userImage, userHandle, likeCount, commentCount },
-    user: { authenticated }
+    post: {
+      body,
+      createdAt,
+      userImage,
+      userHandle,
+      likeCount,
+      commentCount,
+      postId
+    },
+    user: {
+      authenticated,
+      credentials: { handle }
+    }
   } = props;
 
   dayjs.extend(relativeTime);
@@ -73,6 +86,11 @@ function Post(props) {
       <FavoriteBorder color="primary" />
     </MyButton>
   );
+
+  const deleteButton =
+    authenticated && userHandle === handle ? (
+      <DeletePost postId={postId} />
+    ) : null;
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -91,6 +109,7 @@ function Post(props) {
         >
           {userHandle}
         </Typography>
+        {deleteButton}
         <Typography varient="body2" color="textSecondary">
           {dayjs(createdAt).fromNow()}
         </Typography>
