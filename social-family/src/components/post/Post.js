@@ -87,7 +87,11 @@ function Post(props) {
           <ChatIcon color="secondary" />
         </MyButton>
         <span>{commentCount} Comments</span>
-        <PostDialog postId={postId} userHandle={userHandle} />
+        <PostDialog
+          postId={postId}
+          userHandle={userHandle}
+          openDialog={props.openDialog}
+        />
       </CardContent>
     </Card>
   );
@@ -96,7 +100,8 @@ function Post(props) {
 Post.propTypes = {
   user: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  openDialog: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

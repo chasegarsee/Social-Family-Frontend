@@ -1,7 +1,7 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
-import { connect } from "react-redux";
+
 import { Link } from "react-router-dom";
 /* MUI */
 import withStyles from "@material-ui/core/styles/withStyles";

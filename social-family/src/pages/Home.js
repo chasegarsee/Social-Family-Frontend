@@ -27,17 +27,6 @@ const styles = theme => ({
 
 function Home(props) {
   const { classes } = props;
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    function tick() {
-      setProgress(oldProgress => (oldProgress >= 100 ? 0 : oldProgress + 1));
-    }
-
-    const timer = setInterval(tick, 20);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
 
   useEffect(() => {
     props.getPosts();
