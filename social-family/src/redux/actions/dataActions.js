@@ -1,5 +1,6 @@
 import {
   SET_POSTS,
+  SET_POST,
   LOADING_DATA,
   LIKE_POST,
   UNLIKE_POST,
@@ -7,7 +8,8 @@ import {
   CREATE_POST,
   SET_ERRORS,
   CLEAR_ERRORS,
-  LOADING_UI
+  LOADING_UI,
+  STOP_LOADING_UI
 } from "../types";
 
 import axios from "axios";
@@ -28,6 +30,22 @@ export const getPosts = () => dispatch => {
         payload: []
       });
     });
+};
+
+export const getPost = postId => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .get(
+      `https://us-central1-socialfamily-9d867.cloudfunctions.net/api/post/${postId}`
+    )
+    .then(res => {
+      dispatch({
+        type: SET_POST,
+        payload: res.data
+      });
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch(err => console.log(err));
 };
 
 export const createPost = newPost => dispatch => {

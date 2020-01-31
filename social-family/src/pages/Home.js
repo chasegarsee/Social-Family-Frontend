@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { getPosts } from "../redux/actions/dataActions";
 import PropTypes from "prop-types";
-import Post from "../components/Post";
-import Profile from "../components/Profile";
+import Post from "../components/post/Post";
+import Profile from "../components/profile/Profile";
 
 /* MUI */
 import LinearProgress from "@material-ui/core/LinearProgress";
