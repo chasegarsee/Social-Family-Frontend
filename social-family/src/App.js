@@ -19,6 +19,7 @@ import teal from "@material-ui/core/colors/teal";
 import home from "./pages/Home";
 import signup from "./pages/Signup";
 import login from "./pages/Login";
+import user from "./pages/User";
 
 /* COMPONENTS */
 import Navbar from "./components/layout/Navbar";
@@ -77,6 +78,7 @@ function App() {
               <Route exact path="/" component={home} />
               <AuthRoute exact path="/signup" component={signup} />
               <AuthRoute exact path="/login" component={login} />
+              <Route exact path="/users/:handle" component={user} />
             </Switch>
           </div>
         </Router>

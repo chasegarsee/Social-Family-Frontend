@@ -9,7 +9,8 @@ import {
   SET_ERRORS,
   CLEAR_ERRORS,
   LOADING_UI,
-  STOP_LOADING_UI
+  STOP_LOADING_UI,
+  CREATE_COMMENT
 } from "../types";
 
 import axios from "axios";
@@ -97,6 +98,24 @@ export const unlikePost = postId => dispatch => {
     .catch(err => console.log(err));
 };
 
+export const createComment = (postId, commentData) => dispatch => {
+  axios
+    .post(
+      `https://us-central1-socialfamily-9d867.cloudfunctions.net/api/post/${postId}/comment`,
+      commentData
+    )
+    .then(res => {
+      dispatch({ type: CREATE_COMMENT, payload: res.data });
+      dispatch(clearErrors());
+    })
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
 export const deletePost = postId => dispatch => {
   axios
     .delete(
@@ -106,6 +125,23 @@ export const deletePost = postId => dispatch => {
       dispatch({ type: DELETE_POST, payload: postId });
     })
     .catch(err => console.log(err));
+};
+
+export const getUserData = userHandle => dispatch => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get(
+      `https://us-central1-socialfamily-9d867.cloudfunctions.net/api/user/${userHandle}`
+    )
+    .then(res => {
+      dispatch({ type: SET_POSTS, payload: res.data.posts });
+    })
+    .catch(() => {
+      dispatch({
+        type: SET_POSTS,
+        payload: null
+      });
+    });
 };
 
 export const clearErrors = () => dispatch => {

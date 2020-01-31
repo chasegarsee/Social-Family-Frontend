@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import MyButton from "../../util/MyButton";
 import dayjs from "dayjs";
+import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 import { Link } from "react-router-dom";
 /* MUI */
 import Button from "@material-ui/core/Button";
@@ -27,6 +29,11 @@ const styles = {
     border: "none",
     margin: 4
   },
+  // visibleSeparator: {
+  //   width: "100%",
+  //   borderBottom: "1px solid rgba(0,0,0,0.1",
+  //   marginBottom: 20
+  // },
   profileImage: {
     maxWidth: 200,
     height: 200,
@@ -66,7 +73,8 @@ function PostDialog(props) {
       likeCount,
       commentCount,
       userImage,
-      userHandle
+      userHandle,
+      comments
     },
     UI: { loading }
   } = props;
@@ -91,7 +99,7 @@ function PostDialog(props) {
       <LinearProgress variant="query" color="secondary" />
     </div>
   ) : (
-    <Grid container spacing={16}>
+    <Grid container spacing={1}>
       <Grid item sm={5}>
         <img src={userImage} alt="Profile" className={classes.profileImage} />
       </Grid>
@@ -117,6 +125,9 @@ function PostDialog(props) {
         </MyButton>
         <span>{commentCount} Comments</span>
       </Grid>
+      <hr className={classes.visibleSeparator} />
+      <CommentForm postId={postId} />
+      <Comments comments={comments} />
     </Grid>
   );
   return (
