@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 /* REDUX */
 import { connect } from "react-redux";
-import { createPost, clearErrors } from "../redux/actions/dataActions";
+import { createPost, clearErrors } from "../../redux/actions/dataActions";
 
 /* MUI */
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -15,7 +15,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import CircularProgress from "@material-ui/core/CircularProgress";
 /* ICONS */
 
-import MyButton from "../util/MyButton";
+import MyButton from "../../util/MyButton";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 

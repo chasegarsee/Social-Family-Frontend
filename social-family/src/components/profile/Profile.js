@@ -20,8 +20,8 @@ import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 /* REDUX */
 import { connect } from "react-redux";
-import { logoutUser, uploadImage } from "../redux/actions/userActions";
-import MyButton from "../util/MyButton";
+import { logoutUser, uploadImage } from "../../redux/actions/userActions";
+import MyButton from "../../util/MyButton";
 
 const styles = theme => ({
   paper: {

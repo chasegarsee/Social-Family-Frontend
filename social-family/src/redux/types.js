@@ -9,6 +9,7 @@ export const SET_ERRORS = "SET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const LOADING_UI = "LOADING_UI";
 export const LOADING_DATA = "LOADING_DATA";
+export const STOP_LOADING_UI = "STOP_LOADING_UI";
 
 /* DATA REDUCER TYPES */
 export const SET_POSTS = "SET_POSTS";
@@ -17,3 +18,4 @@ export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const DELETE_POST = "DELETE_POST";
 export const CREATE_POST = "CREATE_POST";
+export const CREATE_COMMENT = "CREATE_COMMENT";

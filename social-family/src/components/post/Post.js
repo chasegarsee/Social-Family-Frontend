@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import MyButton from "../util/MyButton";
+import MyButton from "../../util/MyButton";
 import DeletePost from "./DeletePost";
+import PostDialog from "./PostDialog";
+import LikeButton from "./LikeButton";
 
 /* REDUX */
 import { connect } from "react-redux";
-import { likePost, unlikePost } from "../redux/actions/dataActions";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -19,8 +20,6 @@ import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 import ChatIcon from "@material-ui/icons/Chat";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 const styles = {
   card: {
@@ -36,22 +35,6 @@ const styles = {
 };
 
 function Post(props) {
-  const likedPost = () => {
-    if (
-      props.user.likes &&
-      props.user.likes.find(like => like.postId === props.post.postId)
-    )
-      return true;
-    return false;
-  };
-
-  const likePost = () => {
-    props.likePost(props.post.postId);
-  };
-
-  const unlikePost = () => {
-    props.unlikePost(props.post.postId);
-  };
   const {
     classes,
     post: {
@@ -70,22 +53,6 @@ function Post(props) {
   } = props;
 
   dayjs.extend(relativeTime);
-
-  const likeButton = !authenticated ? (
-    <MyButton tip="Like">
-      <Link to="/login">
-        <FavoriteBorder color="primary" />
-      </Link>
-    </MyButton>
-  ) : likedPost() ? (
-    <MyButton tip="Undo Like" onClick={unlikePost}>
-      <FavoriteIcon color="primary" />
-    </MyButton>
-  ) : (
-    <MyButton tip="Undo Like" onClick={likePost}>
-      <FavoriteBorder color="primary" />
-    </MyButton>
-  );
 
   const deleteButton =
     authenticated && userHandle === handle ? (
@@ -114,20 +81,19 @@ function Post(props) {
           {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography varient="body1">{body}</Typography>
-        {likeButton}
+        <LikeButton postId={postId} />
         <span>{likeCount} Likes</span>
         <MyButton tip="Comments">
           <ChatIcon color="secondary" />
         </MyButton>
         <span>{commentCount} Comments</span>
+        <PostDialog postId={postId} userHandle={userHandle} />
       </CardContent>
     </Card>
   );
 }
 
 Post.propTypes = {
-  likePost: PropTypes.func.isRequired,
-  unlikePost: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
@@ -137,12 +103,4 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-const mapActionsToProps = {
-  likePost,
-  unlikePost
-};
-
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(withStyles(styles)(Post));
+export default connect(mapStateToProps)(withStyles(styles)(Post));

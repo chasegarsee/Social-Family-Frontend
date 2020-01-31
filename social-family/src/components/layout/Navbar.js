@@ -1,8 +1,6 @@
 import React, { Fragment } from "react";
-import MyButton from "../util/MyButton";
-
+import MyButton from "../../util/MyButton";
 import { Link } from "react-router-dom";
-import PostPost from "./PostPost";
 
 /* REDUX */
 import { connect } from "react-redux";
@@ -17,7 +15,7 @@ import Button from "@material-ui/core/Button";
 
 import HomeIcon from "@material-ui/icons/Home";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import CreatePost from "./CreatePost";
+import CreatePost from "../post/CreatePost";
 
 function Navbar(props) {
   const { authenticated } = props;
