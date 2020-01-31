@@ -1,10 +1,7 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-
 import dayjs from "dayjs";
-import MyButton from "../../util/MyButton";
 /* MUI */
 import MuiLink from "@material-ui/core/Link";
 import LinkIcon from "@material-ui/icons/Link";
@@ -13,9 +10,6 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-
-import Grid from "@material-ui/core/Grid";
-import LinearProgress from "@material-ui/core/LinearProgress";
 
 const styles = theme => ({
   paper: {

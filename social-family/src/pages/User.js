@@ -4,18 +4,26 @@ import axios from "axios";
 import Post from "../components/post/Post";
 import Grid from "@material-ui/core/Grid";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 import { getUserData } from "../redux/actions/dataActions";
 import StaticProfile from "../components/profile/StaticProfile";
 
 function User(props) {
   const [profile, setProfile] = useState(null);
+  const [postIdParam, setPostIdParam] = useState(null);
 
   const { posts, loading } = props.data;
+  const { getUserData } = props;
 
   useEffect(() => {
     const handle = props.match.params.handle;
-    props.getUserData(handle);
+    const postId = props.match.params.postId;
+
+    if (postId) {
+      setPostIdParam(postId);
+    }
+    getUserData(handle);
     axios
       .get(
         `https://us-central1-socialfamily-9d867.cloudfunctions.net/api/user/${handle}`
@@ -30,15 +38,30 @@ function User(props) {
     <LinearProgress color="secondary" />
   ) : posts === null ? (
     <p>This user doesn't have any posts yet. </p>
-  ) : (
+  ) : !postIdParam ? (
     posts.map(post => <Post key={post.postId} post={post} />)
+  ) : (
+    posts.map(post => {
+      if (post.postId !== postIdParam)
+        return <Post key={post.postId} post={post} />;
+      else return <Post key={post.postId} post={post} openDialog />;
+    })
   );
 
   return (
     <Grid container spacing={3}>
       <Grid item sm={3} xs={12}>
         {profile === null ? (
-          <p>loading profile...</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "300"
+            }}
+          >
+            <CircularProgress size={100} />
+          </div>
         ) : (
           <StaticProfile profile={profile} />
         )}

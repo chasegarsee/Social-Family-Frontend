@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import MyButton from "../../util/MyButton";
@@ -7,8 +7,6 @@ import Comments from "./Comments";
 import CommentForm from "./CommentForm";
 import { Link } from "react-router-dom";
 /* MUI */
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -63,6 +61,13 @@ const styles = {
 
 function PostDialog(props) {
   const [open, setOpen] = useState(false);
+  const [oldPath, setOldPath] = useState("");
+  const [newPath, setNewPath] = useState("");
+  useEffect(() => {
+    if (props.openDialog) {
+      handleOpen();
+    }
+  }, []);
 
   const {
     classes,
@@ -80,11 +85,22 @@ function PostDialog(props) {
   } = props;
 
   const handleOpen = () => {
+    let oldPath = window.location.pathname;
+
+    const { userHandle, postId } = props;
+    const newPath = `/users/${userHandle}/post/${postId}`;
+
+    if (oldPath === newPath) oldPath = `/users/${userHandle}`;
+
+    window.history.pushState(null, null, newPath);
     setOpen(true);
+    setOldPath(oldPath);
+    setNewPath(newPath);
     props.getPost(props.postId);
   };
 
   const handleClose = () => {
+    window.history.pushState(null, null, oldPath);
     setOpen(false);
   };
 

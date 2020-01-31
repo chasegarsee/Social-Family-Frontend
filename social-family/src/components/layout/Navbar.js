@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import MyButton from "../../util/MyButton";
 import { Link } from "react-router-dom";
+import Notifications from "./Notifications";
 
 /* REDUX */
 import { connect } from "react-redux";
@@ -14,7 +15,7 @@ import Button from "@material-ui/core/Button";
 /* ICON */
 
 import HomeIcon from "@material-ui/icons/Home";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+
 import CreatePost from "../post/CreatePost";
 
 function Navbar(props) {
@@ -30,9 +31,8 @@ function Navbar(props) {
                 <HomeIcon />
               </MyButton>
             </Link>
-            <MyButton tip="Notifications">
-              <NotificationsIcon />
-            </MyButton>
+
+            <Notifications />
           </Fragment>
         ) : (
           <Fragment>
