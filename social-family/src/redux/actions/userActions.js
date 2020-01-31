@@ -61,12 +61,14 @@ export const logoutUser = () => dispatch => {
 
 export const getUserData = () => dispatch => {
   dispatch({ type: LOADING_USER });
-  axios.get("/user").then(res => {
-    dispatch({
-      type: SET_USER,
-      payload: res.data
+  axios
+    .get("https://us-central1-socialfamily-9d867.cloudfunctions.net/api/user")
+    .then(res => {
+      dispatch({
+        type: SET_USER,
+        payload: res.data
+      });
     });
-  });
 };
 
 export const uploadImage = formData => dispatch => {
