@@ -47,10 +47,11 @@ function CommentForm(props) {
           onChange={handleChange}
           fullWidth
           className={classes.textField}
+          style={{ margin: ".5em" }}
         />
         <Button
           type="submit"
-          varient="contained"
+          variant="contained"
           color="secondary"
           className={classes.button}
         >

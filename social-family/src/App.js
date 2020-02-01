@@ -13,7 +13,8 @@ import { logoutUser, getUserData } from "./redux/actions/userActions";
 
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import teal from "@material-ui/core/colors/teal";
+import red from "@material-ui/core/colors/red";
+import cyan from "@material-ui/core/colors/cyan";
 
 /* PAGES */
 import home from "./pages/Home";
@@ -28,11 +29,8 @@ import axios from "axios";
 
 const theme = createMuiTheme({
   palette: {
-    primary: teal,
-    secondary: {
-      main: "#2962ff"
-    },
-    thirdary: "#ab003c"
+    primary: { main: red[800] },
+    secondary: { main: cyan[400] }
   },
   form: {
     textAlign: "center"
