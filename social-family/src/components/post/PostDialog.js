@@ -34,8 +34,7 @@ const styles = {
   // },
   profileImage: {
     maxWidth: 200,
-    height: 200,
-    borderRadius: "50%",
+    maxHeight: 200,
     objectFit: "cover"
   },
   dialogContent: {
@@ -43,7 +42,7 @@ const styles = {
   },
   closeButton: {
     position: "absolute",
-    left: "90%",
+    left: "80%",
     top: "3%"
   },
   expandButton: {
@@ -115,7 +114,7 @@ function PostDialog(props) {
       <LinearProgress variant="query" color="secondary" />
     </div>
   ) : (
-    <Grid container spacing={1}>
+    <Grid container spacing={5}>
       <Grid item sm={5}>
         <img src={userImage} alt="Profile" className={classes.profileImage} />
       </Grid>
@@ -141,7 +140,6 @@ function PostDialog(props) {
         </MyButton>
         <span>{commentCount} Comments</span>
       </Grid>
-      <hr className={classes.visibleSeparator} />
       <CommentForm postId={postId} />
       <Comments comments={comments} />
     </Grid>

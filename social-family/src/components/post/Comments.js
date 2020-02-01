@@ -13,6 +13,9 @@ const styles = {
     border: "none",
     margin: 4
   },
+  visibleSeparator: {
+    color: "black"
+  },
   commentImage: {
     maxWidth: "100%",
     height: 100,
@@ -33,7 +36,14 @@ function Comments(props) {
         return (
           <Fragment key={createdAt}>
             <Grid item sm={12}>
-              <Grid container>
+              <Grid
+                container
+                style={{
+                  borderBottom: "solid 1px rgba(0,0,0,0.1)",
+                  marginBottom: 10
+                  //padding: "10px 0"
+                }}
+              >
                 <Grid item sm={2}>
                   <img
                     src={userImage}
@@ -54,17 +64,12 @@ function Comments(props) {
                     <Typography varient="body2" color="textSecondary">
                       {dayjs(createdAt).format(`h:mm a, MMM DD YYYY`)}
                     </Typography>
-
                     <hr className={classes.invisibleSeparator} />
-
                     <Typography varient="body1">{body}</Typography>
                   </div>
                 </Grid>
               </Grid>
             </Grid>
-            {index !== comment.length - 1 && (
-              <hr className={classes.visibleSeparator} />
-            )}
           </Fragment>
         );
       })}
