@@ -68,11 +68,14 @@ if (token) {
 }
 
 function App() {
+  function refreshPage() {
+    window.location.reload(false);
+  }
   return (
     <MuiThemeProvider theme={theme}>
       <Provider store={store}>
         <Router>
-          <Navbar />
+          <Navbar refreshPage={refreshPage} />
           <div className="container">
             <Switch>
               <Route exact path="/" component={home} />

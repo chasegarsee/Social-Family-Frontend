@@ -177,7 +177,7 @@ function Profile(props) {
       <Paper className={classes.paper}>
         <Typography variant="body2" align="center">
           No profile found, please login again
-          <div className={classes.buttons}>
+          <Fragment className={classes.buttons}>
             <Button
               variant="contained"
               color="primary"
@@ -194,7 +194,7 @@ function Profile(props) {
             >
               Signup
             </Button>
-          </div>
+          </Fragment>
         </Typography>
       </Paper>
     )

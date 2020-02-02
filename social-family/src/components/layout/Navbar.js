@@ -15,11 +15,12 @@ import Button from "@material-ui/core/Button";
 /* ICON */
 
 import HomeIcon from "@material-ui/icons/Home";
-
 import CreatePost from "../post/CreatePost";
+import CachedIcon from "@material-ui/icons/Cached";
 
 function Navbar(props) {
-  const { authenticated } = props;
+  const { authenticated, refreshPage } = props;
+
   return (
     <AppBar>
       <Toolbar className="nav-container">
@@ -31,7 +32,6 @@ function Navbar(props) {
                 <HomeIcon />
               </MyButton>
             </Link>
-
             <Notifications />
           </Fragment>
         ) : (
@@ -47,6 +47,9 @@ function Navbar(props) {
             </Button>
           </Fragment>
         )}
+        <MyButton tip="Refresh Content" onClick={refreshPage}>
+          <CachedIcon />
+        </MyButton>
       </Toolbar>
     </AppBar>
   );
