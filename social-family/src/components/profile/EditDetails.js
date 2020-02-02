@@ -108,7 +108,7 @@ function EditDetails(props) {
               name="location"
               type="text"
               lable="Location"
-              placeholder="Where you love"
+              placeholder="Where you live"
               value={location}
               onChange={handleLocationChange}
               fullWidth
