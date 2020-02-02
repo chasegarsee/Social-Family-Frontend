@@ -26,7 +26,8 @@ const styles = {
   },
   button: {
     marginTop: 20,
-    position: "relative"
+    position: "relative",
+    color: "white"
   },
   customError: {
     color: "red",

@@ -24,7 +24,8 @@ const styles = {
   },
   button: {
     marginTop: 20,
-    position: "relative"
+    position: "relative",
+    color: "white"
   },
   customError: {
     color: "red",
@@ -168,7 +169,7 @@ function Signup(props) {
           </Button>
           <br />
           <small>
-            Already have an account?, Login <Link to="/login">here</Link>!
+            Already have an account? Login <Link to="/login">here</Link>!
           </small>
         </form>
       </Grid>

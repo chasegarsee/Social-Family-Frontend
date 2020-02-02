@@ -176,7 +176,7 @@ function Profile(props) {
     ) : (
       <Paper className={classes.paper}>
         <Typography variant="body2" align="center">
-          No profile found, please login again
+          No profile found. Please login or sign up.
           <div className={classes.buttons}>
             <Button
               variant="contained"
