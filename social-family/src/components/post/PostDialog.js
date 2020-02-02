@@ -41,8 +41,8 @@ const styles = {
     padding: 20
   },
   closeButton: {
-    position: "absolute",
-    left: "80%",
+    // position: "absolute",
+    // left: "80%",
     top: "3%"
   },
   expandButton: {
