@@ -54,6 +54,7 @@ function CommentForm(props) {
           variant="contained"
           color="secondary"
           className={classes.button}
+          style={{ color: "white" }}
         >
           Submit
         </Button>
