@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import jwtDecode from "jwt-decode";
 
+/* GOOGLE ANALYTICS */
+import ReactGA from "react-ga";
+
 /* REDUX */
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -67,7 +70,13 @@ if (token) {
   }
 }
 
+function initializeAnalytics() {
+  ReactGA.initialize("UA-157625344-1");
+  ReactGA.pageview("/HomePage");
+}
+
 function App() {
+  initializeAnalytics();
   function refreshPage() {
     window.location.reload(false);
   }
