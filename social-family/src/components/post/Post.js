@@ -29,6 +29,13 @@ const styles = {
   },
   image: {
     minWidth: 175,
+    paddingRight: "10px",
+    borderRight: "1px solid rgba(0,0,0,0.2)"
+  },
+  postImage: {
+    minWidth: 175,
+    minHeight: 175,
+    maxHeight: 175,
     backgroundSize: "contain"
   },
   content: {}
@@ -44,7 +51,8 @@ function Post(props) {
       userHandle,
       likeCount,
       commentCount,
-      postId
+      postId,
+      imageUrl
     },
     user: {
       authenticated,
@@ -63,8 +71,6 @@ function Post(props) {
       <CardMedia
         className={classes.image}
         image={userImage}
-        component={Link}
-        to={`/users/${userHandle}`}
         title="Profile Image"
       />
       <CardContent className={classes.content}>
@@ -76,11 +82,26 @@ function Post(props) {
         >
           {userHandle}
         </Typography>
+        <CardMedia
+          className={classes.image}
+          image={userImage}
+          component={Link}
+          to={`/users/${userHandle}`}
+          title="Profile Image"
+        />
         {deleteButton}
         <Typography varient="body2" color="textSecondary">
           {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography varient="body1">{body}</Typography>
+        {imageUrl ? (
+          <CardMedia
+            image={imageUrl}
+            title="Post Image"
+            className={classes.postImage}
+          />
+        ) : null}
+
         <LikeButton postId={postId} />
         <span>{likeCount} Likes</span>
         <MyButton tip="Comments">
