@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import MyButton from "../../util/MyButton";
 import DeletePost from "./DeletePost";
 import PostDialog from "./PostDialog";
+import PostDialogWithChat from "./PostDialogWithChat";
 import LikeButton from "./LikeButton";
 
 /* REDUX */
@@ -18,8 +19,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
-
-import ChatIcon from "@material-ui/icons/Chat";
 
 const styles = {
   card: {
@@ -105,8 +104,13 @@ function Post(props) {
         <LikeButton postId={postId} />
         <span>{likeCount} Likes</span>
         <MyButton tip="Comments">
-          <ChatIcon color="secondary" />
+          <PostDialogWithChat
+            postId={postId}
+            userHandle={userHandle}
+            openDialog={props.openDialog}
+          />
         </MyButton>
+
         <span>{commentCount} Comments</span>
         <PostDialog
           postId={postId}
