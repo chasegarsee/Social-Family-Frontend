@@ -35,7 +35,7 @@ const styles = {
   profileImage: {
     maxWidth: 200,
     maxHeight: 200,
-    objectFit: "cover"
+    backgroundSize: "contain"
   },
   dialogContent: {
     padding: 20
@@ -105,13 +105,11 @@ function PostDialog(props) {
 
   const dialogMarkup = loading ? (
     <div className={classes.spinnerDiv}>
-      <LinearProgress color="secondary" />
       <CircularProgress
         size={200}
         thickness={2}
         className={classes.circularProgress}
       />
-      <LinearProgress variant="query" color="secondary" />
     </div>
   ) : (
     <Grid container spacing={5}>
