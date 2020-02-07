@@ -53,8 +53,30 @@ export const createPost = newPost => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
     .post(
-      "https://us-central1-socialfamily-9d867.cloudfunctions.net/api/post",
+      "http://localhost:5000/socialfamily-9d867/us-central1/api/post",
       newPost
+    )
+    .then(res => {
+      dispatch({
+        type: CREATE_POST,
+        payload: res.data
+      });
+      dispatch(clearErrors());
+    })
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+
+export const uploadImageToPost = (postId, formData) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post(
+      `http://localhost:5000/socialfamily-9d867/us-central1/api/post/image/${postId}`,
+      formData
     )
     .then(res => {
       dispatch({
