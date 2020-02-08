@@ -41,8 +41,8 @@ class CreatePost extends React.Component {
     super(props);
     this.state = {
       open: false,
-      body: "THIS IS SOME TEXT",
-      imageUrl: "",
+      body: "",
+
       error: {}
     };
   }
@@ -67,26 +67,9 @@ class CreatePost extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleEditPhoto = () => {
-    const fileInput = document.getElementById("imageInput");
-    fileInput.click();
-  };
-
-  handleImageChange = e => {
-    const image = e.target.files[0];
-    console.log(image);
-    const formData = new FormData();
-    formData.append("image", image, image.name);
-    const body = this.state.body;
-    this.setState({ imageUrl: formData });
-  };
-
   handleSubmit = event => {
     event.preventDefault();
-    this.props.createPost({
-      body: this.state.body,
-      imageUrl: this.state.imageUrl
-    });
+    this.props.createPost({ body: this.state.body });
   };
 
   render() {
@@ -129,19 +112,6 @@ class CreatePost extends React.Component {
                 onChange={this.handleChange}
                 fullWidth
               />
-              <input
-                type="file"
-                id="imageInput"
-                onChange={this.handleImageChange}
-              />
-              {/* <Button
-                variant="contained"
-                color="secondary"
-                className={classes.addPhotoButton}
-                onClick={this.handleEditPhoto}
-              >
-                Add Photo
-              </Button> */}
 
               <Button
                 type="submit"

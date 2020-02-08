@@ -20,7 +20,6 @@ const styles = theme => ({
 
 function AddImageToPost(props) {
   const { classes } = props;
-  console.log(props.postId);
   const handleImageChange = e => {
     const image = e.target.files[0];
     console.log(image);
