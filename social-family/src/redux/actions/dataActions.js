@@ -79,10 +79,7 @@ export const uploadImageToPost = (postId, formData) => dispatch => {
       formData
     )
     .then(res => {
-      dispatch({
-        type: CREATE_POST,
-        payload: res.data
-      });
+      dispatch(getPosts());
       dispatch(clearErrors());
     })
     .catch(err => {
