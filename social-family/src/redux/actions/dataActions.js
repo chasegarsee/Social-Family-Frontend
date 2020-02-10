@@ -75,7 +75,7 @@ export const uploadImageToPost = (postId, formData) => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
     .post(
-      `http://localhost:5000/socialfamily-9d867/us-central1/api/post/image/${postId}`,
+      `https://us-central1-socialfamily-9d867.cloudfunctions.net/api/post/image/${postId}`,
       formData
     )
     .then(res => {
