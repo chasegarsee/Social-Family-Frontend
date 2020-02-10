@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 /* ICONS */
@@ -84,18 +83,16 @@ function PostDialog(props) {
   } = props;
 
   const handleOpen = () => {
+    const { userHandle, postId, getPost } = props;
+    let newPath = `/users/${userHandle}/post/${postId}`;
     let oldPath = window.location.pathname;
-
-    const { userHandle, postId } = props;
-    const newPath = `/users/${userHandle}/post/${postId}`;
-
     if (oldPath === newPath) oldPath = `/users/${userHandle}`;
 
     window.history.pushState(null, null, newPath);
     setOpen(true);
     setOldPath(oldPath);
     setNewPath(newPath);
-    props.getPost(props.postId);
+    getPost(postId);
   };
 
   const handleClose = () => {

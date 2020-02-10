@@ -21,6 +21,11 @@ const styles = theme => ({
     float: "right",
     marginTop: 10
   },
+  addPhotoButton: {
+    position: "relative",
+    float: "left",
+    marginTop: 10
+  },
   progressSpinner: {
     position: "absolute"
   },
@@ -31,12 +36,16 @@ const styles = theme => ({
   }
 });
 
-class CreatePost extends Component {
-  state = {
-    open: false,
-    body: "",
-    error: {}
-  };
+class CreatePost extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      body: "THIS IS SOME TEXT",
+      imageUrl: "",
+      error: {}
+    };
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.error) {
       this.setState({
@@ -57,10 +66,29 @@ class CreatePost extends Component {
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
+
+  handleEditPhoto = () => {
+    const fileInput = document.getElementById("imageInput");
+    fileInput.click();
+  };
+
+  handleImageChange = e => {
+    const image = e.target.files[0];
+    console.log(image);
+    const formData = new FormData();
+    formData.append("image", image, image.name);
+    const body = this.state.body;
+    this.setState({ imageUrl: formData });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-    this.props.createPost({ body: this.state.body });
+    this.props.createPost({
+      body: this.state.body,
+      imageUrl: this.state.imageUrl
+    });
   };
+
   render() {
     const { error } = this.state;
     const {
@@ -101,12 +129,27 @@ class CreatePost extends Component {
                 onChange={this.handleChange}
                 fullWidth
               />
+              <input
+                type="file"
+                id="imageInput"
+                onChange={this.handleImageChange}
+              />
+              {/* <Button
+                variant="contained"
+                color="secondary"
+                className={classes.addPhotoButton}
+                onClick={this.handleEditPhoto}
+              >
+                Add Photo
+              </Button> */}
+
               <Button
                 type="submit"
                 variant="contained"
                 color="primary"
                 className={classes.submitButton}
                 disabled={loading}
+                onClick={this.handleChange}
               >
                 Submit
                 {loading && (

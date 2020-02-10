@@ -102,12 +102,14 @@ function Profile(props) {
 
   const handleImageChange = e => {
     const image = e.target.files[0];
+    console.log(image);
     const formData = new FormData();
     formData.append("image", image, image.name);
     props.uploadImage(formData);
   };
   const handleEditPhoto = () => {
     const fileInput = document.getElementById("imageInput");
+    console.log("FILE IN??", fileInput);
     fileInput.click();
   };
 

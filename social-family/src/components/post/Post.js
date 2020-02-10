@@ -19,6 +19,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
+import AddImageToPost from "./AddImageToPost";
 
 const styles = {
   card: {
@@ -32,10 +33,10 @@ const styles = {
     borderRight: "1px solid rgba(0,0,0,0.2)"
   },
   postImage: {
-    minWidth: 175,
-    minHeight: 175,
+    minWidth: 200,
+    minHeight: 200,
     maxHeight: 175,
-    backgroundSize: "contain"
+    borderRadius: 2
   },
   content: {}
 };
@@ -65,6 +66,11 @@ function Post(props) {
     authenticated && userHandle === handle ? (
       <DeletePost postId={postId} />
     ) : null;
+  const uploadImage =
+    authenticated && userHandle === handle ? (
+      <AddImageToPost postId={postId} />
+    ) : null;
+
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -88,17 +94,21 @@ function Post(props) {
           to={`/users/${userHandle}`}
           title="Profile Image"
         />
+        {uploadImage}
         {deleteButton}
+
         <Typography varient="body2" color="textSecondary">
           {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography varient="body1">{body}</Typography>
         {imageUrl ? (
-          <CardMedia
-            image={imageUrl}
-            title="Post Image"
-            className={classes.postImage}
-          />
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <CardMedia
+              image={imageUrl}
+              title="Post Image"
+              className={classes.postImage}
+            />
+          </div>
         ) : null}
 
         <LikeButton postId={postId} />
