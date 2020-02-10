@@ -10,11 +10,11 @@ import { uploadImageToPost } from "../../redux/actions/dataActions";
 const styles = theme => ({
   addImageButton: {
     position: "absolute",
-    left: "90%",
-    top: 125
+    left: "85%",
+    top: 1
   },
   addIcon: {
-    color: "#e36107"
+    color: "#26c6da"
   }
 });
 

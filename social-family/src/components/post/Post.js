@@ -94,9 +94,9 @@ function Post(props) {
           to={`/users/${userHandle}`}
           title="Profile Image"
         />
-
-        {deleteButton}
         {uploadImage}
+        {deleteButton}
+
         <Typography varient="body2" color="textSecondary">
           {dayjs(createdAt).fromNow()}
         </Typography>
