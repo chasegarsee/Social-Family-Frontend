@@ -23,15 +23,24 @@ function User(props) {
     if (postId) {
       setPostIdParam(postId);
     }
+
     getUserData(handle);
-    axios
-      .get(
+    // axios
+    //   .get(
+    //     `https://us-central1-socialfamily-9d867.cloudfunctions.net/api/user/${handle}`
+    //   )
+    //   .then(res => {
+    //     setProfile(res.data.user);
+    //   })
+    //   .catch(err => console.log(err));
+
+    async function setUserProfile() {
+      const res = await axios.get(
         `https://us-central1-socialfamily-9d867.cloudfunctions.net/api/user/${handle}`
-      )
-      .then(res => {
-        setProfile(res.data.user);
-      })
-      .catch(err => console.log(err));
+      );
+      await setProfile(res.data.user);
+    }
+    setUserProfile();
   }, []);
 
   const postsMarkup = loading ? (

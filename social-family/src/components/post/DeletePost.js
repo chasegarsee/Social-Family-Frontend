@@ -56,7 +56,7 @@ function DeletePost(props) {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleDeletePost} color="#e36107">
+          <Button onClick={handleDeletePost} className={classes.deleteIcon}>
             Delete
           </Button>
         </DialogActions>

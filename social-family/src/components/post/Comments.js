@@ -18,9 +18,11 @@ const styles = {
   },
   commentImage: {
     maxWidth: "100%",
-    maxHeight: 175
+    maxHeight: 175,
+    padding: "0 20px"
   },
   commentData: {
+    paddingLeft: 20,
     marginLeft: 20
   }
 };

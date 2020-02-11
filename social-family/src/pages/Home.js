@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getPosts } from "../redux/actions/dataActions";
 import PropTypes from "prop-types";

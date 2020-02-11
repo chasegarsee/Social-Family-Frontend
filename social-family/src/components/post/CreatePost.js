@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import MyButton from "../../util/MyButton";
@@ -42,7 +42,6 @@ class CreatePost extends React.Component {
     this.state = {
       open: false,
       body: "",
-
       error: {}
     };
   }
