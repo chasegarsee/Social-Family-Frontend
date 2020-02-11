@@ -25,7 +25,7 @@ import LikeButton from "./LikeButton";
 const styles = {
   invisibleSeparator: {
     border: "none",
-    margin: 4
+    margin: 3
   },
   // visibleSeparator: {
   //   width: "100%",
@@ -122,8 +122,8 @@ function PostDialog(props) {
       />
     </div>
   ) : (
-    <Grid container spacing={5}>
-      <Grid item sm={1} style={{ padding: "0 20px" }}>
+    <div>
+      <div>
         <div
           style={{
             display: "flex",
@@ -144,8 +144,8 @@ function PostDialog(props) {
             {dayjs(createdAt).format("h:mm a, MMM DD")}
           </p>
         </div>
-      </Grid>
-      <Grid item sm={7} style={{ padding: "0 20px" }}>
+      </div>
+      <div>
         <hr className={classes.invisibleSeparator} />
         <Typography varient="body1">{body}</Typography>
         {imageUrl ? (
@@ -163,10 +163,10 @@ function PostDialog(props) {
           <ChatIcon color="secondary" />
         </MyButton>
         <span>{commentCount} Comments</span>
-      </Grid>
+      </div>
       <CommentForm postId={postId} />
       <Comments comments={comments} />
-    </Grid>
+    </div>
   );
   return (
     <Fragment>
