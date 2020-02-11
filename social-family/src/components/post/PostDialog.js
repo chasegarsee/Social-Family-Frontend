@@ -25,7 +25,7 @@ import LikeButton from "./LikeButton";
 const styles = {
   invisibleSeparator: {
     border: "none",
-    margin: 4
+    margin: 3
   },
   // visibleSeparator: {
   //   width: "100%",
@@ -33,9 +33,15 @@ const styles = {
   //   marginBottom: 20
   // },
   profileImage: {
-    maxWidth: 200,
-    maxHeight: 200,
+    maxWidth: 50,
+    maxHeight: 50,
+    borderRadius: "50%",
     backgroundSize: "contain"
+  },
+  timeDate: {
+    color: "grey",
+
+    margin: 0
   },
   dialogContent: {
     padding: 20
@@ -117,23 +123,30 @@ function PostDialog(props) {
       />
     </div>
   ) : (
-    <Grid container spacing={5}>
-      <Grid item sm={5}>
-        <img src={userImage} alt="Profile" className={classes.profileImage} />
-      </Grid>
-      <Grid item sm={7}>
-        <Typography
-          component={Link}
-          color="primary"
-          varient="h5"
-          to={`/users/${userHandle}`}
+    <div>
+      <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center"
+          }}
         >
-          @{userHandle}
-        </Typography>
-        <hr className={classes.invisibleSeparator} />
-        <Typography varient="body2" color="textSecondary">
-          {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
-        </Typography>
+          <img src={userImage} alt="Profile" className={classes.profileImage} />
+          <Typography
+            component={Link}
+            color="primary"
+            varient="h5"
+            to={`/users/${userHandle}`}
+          >
+            @{userHandle}
+            <p className={classes.timeDate}>
+              {dayjs(createdAt).format("h:mm a, MMM DD")}
+            </p>
+          </Typography>
+        </div>
+      </div>
+      <div>
         <hr className={classes.invisibleSeparator} />
         <Typography varient="body1">{body}</Typography>
         {imageUrl ? (
@@ -151,10 +164,10 @@ function PostDialog(props) {
           <ChatIcon color="secondary" />
         </MyButton>
         <span>{commentCount} Comments</span>
-      </Grid>
+      </div>
       <CommentForm postId={postId} />
       <Comments comments={comments} />
-    </Grid>
+    </div>
   );
   return (
     <Fragment>
