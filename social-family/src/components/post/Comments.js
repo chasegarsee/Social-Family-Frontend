@@ -32,7 +32,7 @@ function Comments(props) {
     <div
       style={{
         display: "flex",
-        borderBottom: "solid 1px rgba(0,0,0,0.1)",
+        flexDirection: "column",
         marginBottom: 10
       }}
     >
@@ -40,7 +40,12 @@ function Comments(props) {
         const { body, createdAt, userImage, userHandle } = comment;
         return (
           <Fragment key={createdAt}>
-            <div>
+            <div
+              style={{
+                borderBottom: "solid 1px rgba(0,0,0,0.1)",
+                marginBottom: 7
+              }}
+            >
               <div>
                 <div
                   style={{
