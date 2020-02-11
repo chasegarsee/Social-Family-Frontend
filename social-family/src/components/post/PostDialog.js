@@ -35,7 +35,7 @@ const styles = {
   profileImage: {
     maxWidth: 50,
     maxHeight: 50,
-    borderRadius: "50%",
+
     backgroundSize: "contain"
   },
   timeDate: {
