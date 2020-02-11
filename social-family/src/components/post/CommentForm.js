@@ -47,7 +47,7 @@ function CommentForm(props) {
           onChange={handleChange}
           fullWidth
           className={classes.textField}
-          style={{ margin: ".5em" }}
+          style={{ marginBottom: ".5em" }}
         />
         <Button
           type="submit"

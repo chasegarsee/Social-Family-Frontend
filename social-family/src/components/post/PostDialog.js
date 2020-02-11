@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 /* MUI */
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
+import CardMedia from "@material-ui/core/CardMedia";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -54,6 +55,12 @@ const styles = {
   },
   circularProgress: {
     color: "rgb(245, 245, 245)"
+  },
+  postImage: {
+    minWidth: 200,
+    minHeight: 200,
+    maxHeight: 175,
+    borderRadius: 2
   }
 };
 
@@ -77,7 +84,8 @@ function PostDialog(props) {
       commentCount,
       userImage,
       userHandle,
-      comments
+      comments,
+      imageUrl
     },
     UI: { loading }
   } = props;
@@ -128,6 +136,15 @@ function PostDialog(props) {
         </Typography>
         <hr className={classes.invisibleSeparator} />
         <Typography varient="body1">{body}</Typography>
+        {imageUrl ? (
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <CardMedia
+              image={imageUrl}
+              title="Post Image"
+              className={classes.postImage}
+            />
+          </div>
+        ) : null}
         <LikeButton postId={postId} />
         <span>{likeCount} Likes</span>
         <MyButton tip="Comments">
