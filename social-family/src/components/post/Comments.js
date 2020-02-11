@@ -19,9 +19,8 @@ const styles = {
     margin: 0
   },
   commentImage: {
-    height: 50,
-    width: 50,
-    borderRadius: "50%",
+    maxHeight: 50,
+    maxWidth: 50,
     backgroundSize: "contain"
   }
 };
