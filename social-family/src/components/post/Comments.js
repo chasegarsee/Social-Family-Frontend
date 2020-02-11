@@ -13,67 +13,73 @@ const styles = {
     border: "none",
     margin: 4
   },
-  visibleSeparator: {
-    color: "black"
+  timeDate: {
+    color: "grey",
+
+    margin: 0
   },
   commentImage: {
-    maxWidth: "100%",
-    maxHeight: 175,
-    padding: "0 20px"
-  },
-  commentData: {
-    paddingLeft: 20,
-    marginLeft: 20
+    height: 50,
+    width: 50,
+    borderRadius: "50%",
+    backgroundSize: "contain"
   }
 };
 
 function Comments(props) {
   const { classes, comments } = props;
   return (
-    <Grid container>
+    <div
+      style={{
+        display: "flex",
+        borderBottom: "solid 1px rgba(0,0,0,0.1)",
+        marginBottom: 10
+      }}
+    >
       {comments.map((comment, index) => {
         const { body, createdAt, userImage, userHandle } = comment;
         return (
           <Fragment key={createdAt}>
-            <Grid item sm={12}>
-              <Grid
-                container
-                style={{
-                  borderBottom: "solid 1px rgba(0,0,0,0.1)",
-                  marginBottom: 10
-                  //padding: "10px 0"
-                }}
-              >
-                <Grid item sm={2}>
+            <div>
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "center"
+                  }}
+                >
                   <img
                     src={userImage}
                     alt="comment"
                     className={classes.commentImage}
                   />
-                </Grid>
-                <Grid item sm={9}>
-                  <div className={classes.commentData}>
+                  <div style={{ paddingLeft: 7 }}>
                     <Typography
-                      variant="h5"
+                      variant="h6"
                       component={Link}
                       to={`/users/${userHandle}`}
                       color="primary"
                     >
                       {userHandle}
                     </Typography>
-                    <Typography varient="body2" color="textSecondary">
-                      {dayjs(createdAt).format(`h:mm a, MMM DD YYYY`)}
-                    </Typography>
+                    <p className={classes.timeDate}>
+                      {dayjs(createdAt).format("h:mm a, MMM DD")}
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <div className={classes.commentData}>
                     <hr className={classes.invisibleSeparator} />
                     <Typography varient="body1">{body}</Typography>
                   </div>
-                </Grid>
-              </Grid>
-            </Grid>
+                </div>
+              </div>
+            </div>
           </Fragment>
         );
       })}
-    </Grid>
+    </div>
   );
 }
 

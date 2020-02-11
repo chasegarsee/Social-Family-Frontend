@@ -40,7 +40,8 @@ const styles = {
   },
   timeDate: {
     color: "grey",
-    paddingLeft: 5
+
+    margin: 0
   },
   dialogContent: {
     padding: 20
@@ -138,11 +139,11 @@ function PostDialog(props) {
             varient="h5"
             to={`/users/${userHandle}`}
           >
-            {`@${userHandle}    `}
+            @{userHandle}
+            <p className={classes.timeDate}>
+              {dayjs(createdAt).format("h:mm a, MMM DD")}
+            </p>
           </Typography>
-          <p className={classes.timeDate}>
-            {dayjs(createdAt).format("h:mm a, MMM DD")}
-          </p>
         </div>
       </div>
       <div>
