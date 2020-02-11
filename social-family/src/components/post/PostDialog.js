@@ -33,9 +33,14 @@ const styles = {
   //   marginBottom: 20
   // },
   profileImage: {
-    maxWidth: 200,
-    maxHeight: 200,
+    maxWidth: 50,
+    maxHeight: 50,
+    borderRadius: "50%",
     backgroundSize: "contain"
+  },
+  timeDate: {
+    color: "grey",
+    paddingLeft: 5
   },
   dialogContent: {
     padding: 20
@@ -118,22 +123,29 @@ function PostDialog(props) {
     </div>
   ) : (
     <Grid container spacing={5}>
-      <Grid item sm={5}>
-        <img src={userImage} alt="Profile" className={classes.profileImage} />
-      </Grid>
-      <Grid item sm={7}>
-        <Typography
-          component={Link}
-          color="primary"
-          varient="h5"
-          to={`/users/${userHandle}`}
+      <Grid item sm={1} style={{ padding: "0 20px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center"
+          }}
         >
-          @{userHandle}
-        </Typography>
-        <hr className={classes.invisibleSeparator} />
-        <Typography varient="body2" color="textSecondary">
-          {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
-        </Typography>
+          <img src={userImage} alt="Profile" className={classes.profileImage} />
+          <Typography
+            component={Link}
+            color="primary"
+            varient="h5"
+            to={`/users/${userHandle}`}
+          >
+            {`@${userHandle}    `}
+          </Typography>
+          <p className={classes.timeDate}>
+            {dayjs(createdAt).format("h:mm a, MMM DD")}
+          </p>
+        </div>
+      </Grid>
+      <Grid item sm={7} style={{ padding: "0 20px" }}>
         <hr className={classes.invisibleSeparator} />
         <Typography varient="body1">{body}</Typography>
         {imageUrl ? (
