@@ -159,11 +159,11 @@ function PostDialog(props) {
           </div>
         ) : null}
         <LikeButton postId={postId} />
-        <span>{likeCount} Likes</span>
+        <span>{likeCount}</span>
         <MyButton tip="Comments">
           <ChatIcon color="secondary" />
         </MyButton>
-        <span>{commentCount} Comments</span>
+        <span>{commentCount}</span>
       </div>
       <CommentForm postId={postId} />
       <Comments comments={comments} />

@@ -39,7 +39,7 @@ function LikeButton(props) {
       <FavoriteIcon color="primary" />
     </MyButton>
   ) : (
-    <MyButton tip="Undo Like" onClick={likePost}>
+    <MyButton tip="Like Post" onClick={likePost}>
       <FavoriteBorder color="primary" />
     </MyButton>
   );

@@ -112,7 +112,7 @@ function Post(props) {
         ) : null}
 
         <LikeButton postId={postId} />
-        <span>{likeCount} Likes</span>
+        <span>{likeCount}</span>
         <MyButton tip="Comments">
           <PostDialogWithChat
             postId={postId}
@@ -121,7 +121,7 @@ function Post(props) {
           />
         </MyButton>
 
-        <span>{commentCount} Comments</span>
+        <span>{commentCount}</span>
         <PostDialog
           postId={postId}
           userHandle={userHandle}
