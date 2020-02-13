@@ -116,18 +116,20 @@ function PostDialog(props) {
     setOpen(false);
   };
 
-  const likedBy = likes ? (
-    likes.length === 1 ? (
-      <span className={classes.likesMessage}>
-        Liked by <strong>{[likes[0].userHandle]}</strong>
-      </span>
-    ) : (
-      <span className={classes.likesMessage}>
-        Liked by <strong>{[likes[0].userHandle]}</strong> & {likes.length - 1}{" "}
-        others
-      </span>
-    )
-  ) : null;
+  const likedBy = !likes ? null : likes.length === 1 ? (
+    <span className={classes.likesMessage}>
+      Liked by <strong>{[likes[0].userHandle]}</strong>
+    </span>
+  ) : likes.length === 2 ? (
+    <span className={classes.likesMessage}>
+      Liked by <strong>{[likes[0].userHandle]}</strong> & 1 other
+    </span>
+  ) : (
+    <span className={classes.likesMessage}>
+      Liked by <strong>{[likes[0].userHandle]}</strong> & {likes.length - 1}{" "}
+      others
+    </span>
+  );
 
   const dialogMarkup = loading ? (
     <div className={classes.spinnerDiv}>
