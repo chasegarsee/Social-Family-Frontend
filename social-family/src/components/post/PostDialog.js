@@ -119,12 +119,12 @@ function PostDialog(props) {
   const likedBy = likes ? (
     likes.length === 1 ? (
       <span className={classes.likesMessage}>
-        <strong>{[likes[0].userHandle]}</strong> likes your post
+        Liked by <strong>{[likes[0].userHandle]}</strong>
       </span>
     ) : (
       <span className={classes.likesMessage}>
-        <strong>{[likes[0].userHandle]}</strong> & {likes.length - 1} others
-        like your post
+        Liked by <strong>{[likes[0].userHandle]}</strong> & {likes.length - 1}{" "}
+        others
       </span>
     )
   ) : null;
