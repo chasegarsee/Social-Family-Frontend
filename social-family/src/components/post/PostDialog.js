@@ -11,7 +11,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 /* ICONS */
 import CloseIcon from "@material-ui/icons/Close";
@@ -47,8 +46,6 @@ const styles = {
     padding: 20
   },
   closeButton: {
-    // position: "absolute",
-    // left: "80%",
     top: "3%"
   },
   expandButton: {
@@ -67,6 +64,10 @@ const styles = {
     minHeight: 200,
     maxHeight: 175,
     borderRadius: 2
+  },
+  likesMessage: {
+    color: "grey",
+    fontSize: ".75rem"
   }
 };
 
@@ -91,6 +92,7 @@ function PostDialog(props) {
       userImage,
       userHandle,
       comments,
+      likes,
       imageUrl
     },
     UI: { loading }
@@ -114,6 +116,19 @@ function PostDialog(props) {
     setOpen(false);
   };
 
+  const likedBy = likes ? (
+    likes.length === 1 ? (
+      <span className={classes.likesMessage}>
+        <strong>{[likes[0].userHandle]}</strong> likes your post
+      </span>
+    ) : (
+      <span className={classes.likesMessage}>
+        <strong>{[likes[0].userHandle]}</strong> & {likes.length - 1} others
+        like your post
+      </span>
+    )
+  ) : null;
+
   const dialogMarkup = loading ? (
     <div className={classes.spinnerDiv}>
       <CircularProgress
@@ -134,6 +149,7 @@ function PostDialog(props) {
         >
           <img src={userImage} alt="Profile" className={classes.profileImage} />
           <Typography
+            style={{ marginLeft: 10 }}
             component={Link}
             color="primary"
             varient="h5"
@@ -159,12 +175,14 @@ function PostDialog(props) {
           </div>
         ) : null}
         <LikeButton postId={postId} />
-        <span>{likeCount} Likes</span>
+        <span>{likeCount}</span>
+
         <MyButton tip="Comments">
           <ChatIcon color="secondary" />
         </MyButton>
-        <span>{commentCount} Comments</span>
+        <span>{commentCount}</span>
       </div>
+      {likedBy}
       <CommentForm postId={postId} />
       <Comments comments={comments} />
     </div>

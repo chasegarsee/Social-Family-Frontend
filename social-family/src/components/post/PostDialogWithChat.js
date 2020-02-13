@@ -134,11 +134,11 @@ function PostDialogWithChat(props) {
         <hr className={classes.invisibleSeparator} />
         <Typography varient="body1">{body}</Typography>
         <LikeButton postId={postId} />
-        <span>{likeCount} Likes</span>
+        <span>{likeCount}</span>
         <MyButton tip="Comments">
           <ChatIcon color="secondary" />
         </MyButton>
-        <span>{commentCount} Comments</span>
+        <span>{commentCount}</span>
       </Grid>
       <CommentForm postId={postId} />
       <Comments comments={comments} />
