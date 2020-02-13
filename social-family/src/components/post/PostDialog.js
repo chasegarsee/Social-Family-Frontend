@@ -134,6 +134,7 @@ function PostDialog(props) {
         >
           <img src={userImage} alt="Profile" className={classes.profileImage} />
           <Typography
+            style={{ marginLeft: 10 }}
             component={Link}
             color="primary"
             varient="h5"
