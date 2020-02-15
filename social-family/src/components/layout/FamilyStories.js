@@ -1,18 +1,64 @@
-import React, { Component } from "react";
+import React, { useState, Fragment } from "react";
 import Stories from "react-insta-stories";
+import withStyles from "@material-ui/core/styles/withStyles";
+import MyButton from "../../util/MyButton";
 
-export default function FamilyStories(props) {
+/* MUI */
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import CardMedia from "@material-ui/core/CardMedia";
+/* ICONS */
+import CloseIcon from "@material-ui/icons/Close";
+import UnfoldMore from "@material-ui/icons/UnfoldMore";
+
+const styles = {};
+
+function FamilyStories(props) {
+  const [open, setOpen] = useState(false);
+
+  const { classes } = props;
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div>
-      <Stories
-        stories={stories}
-        defaultInterval={1500}
-        width={432}
-        height={768}
-      />
+      <Fragment>
+        <MyButton
+          onClick={handleOpen}
+          tip="Expand Post"
+          tipClassName={classes.expandButton}
+        >
+          <UnfoldMore color="primary" />
+        </MyButton>
+        <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+          <MyButton
+            tip="Close"
+            onClick={handleClose}
+            tipClassName={classes.closeButton}
+          >
+            <CloseIcon />
+          </MyButton>
+          <DialogContent className={classes.dialogContent}>
+            <Stories
+              stories={stories}
+              defaultInterval={1500}
+              width={432}
+              height={768}
+            />
+          </DialogContent>
+        </Dialog>
+      </Fragment>
     </div>
   );
 }
+
+export default withStyles(styles)(FamilyStories);
 
 const stories = [
   {
@@ -56,22 +102,5 @@ const stories = [
       profileImage:
         "https://avatars0.githubusercontent.com/u/24852829?s=400&v=4"
     }
-  },
-  {
-    url: "https://storage.googleapis.com/coverr-main/mp4/Footboys.mp4",
-    type: "video",
-    duration: 1000
-  },
-  {
-    url:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    type: "video",
-    seeMore: ({ close }) => <div>Hello</div>
-  },
-  {
-    url:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    type: "video"
-  },
-  "https://images.unsplash.com/photo-1534856966153-c86d43d53fe0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80"
+  }
 ];
