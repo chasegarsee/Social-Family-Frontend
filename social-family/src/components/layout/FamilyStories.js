@@ -11,7 +11,11 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
 
-const styles = {};
+const styles = {
+  dialogContent: {
+    padding: 20
+  }
+};
 
 function FamilyStories(props) {
   const [open, setOpen] = useState(false);
@@ -45,12 +49,20 @@ function FamilyStories(props) {
             <CloseIcon />
           </MyButton>
           <DialogContent className={classes.dialogContent}>
-            <Stories
-              stories={stories}
-              defaultInterval={1500}
-              width={432}
-              height={768}
-            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Stories
+                stories={stories}
+                defaultInterval={3000}
+                //width={432}
+                //height={768}
+              />
+            </div>
           </DialogContent>
         </Dialog>
       </Fragment>
