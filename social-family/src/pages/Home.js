@@ -45,7 +45,7 @@ function Home(props) {
 
   return (
     <div>
-      <Stories />
+      {/* <Stories /> */}
       <Grid container spacing={3}>
         <Grid item sm={3} xs={12}>
           <Profile />
