@@ -9,6 +9,7 @@ import Profile from "../components/profile/Profile";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
+import Stories from "../components/layout/FamilyStories";
 
 const styles = theme => ({
   profileCenter: {
@@ -43,14 +44,17 @@ function Home(props) {
   );
 
   return (
-    <Grid container spacing={3}>
-      <Grid item sm={3} xs={12}>
-        <Profile />
+    <div>
+      {/* <Stories /> */}
+      <Grid container spacing={3}>
+        <Grid item sm={3} xs={12}>
+          <Profile />
+        </Grid>
+        <Grid item sm={9} xs={12}>
+          {recentPostMarkup}
+        </Grid>
       </Grid>
-      <Grid item sm={9} xs={12}>
-        {recentPostMarkup}
-      </Grid>
-    </Grid>
+    </div>
   );
 }
 
