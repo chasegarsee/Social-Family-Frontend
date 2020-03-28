@@ -143,7 +143,9 @@ function EditDetails(props) {
             />
           </form>
         </DialogContent>
-        <SketchPicker color={navColor} onChange={handleNavColorChange} />
+        <div style={{ padding: "20px" }}>
+          <SketchPicker color={navColor} onChange={handleNavColorChange} />
+        </div>
         <DialogActions>
           <Button onClick={handleClose} varient="" color="secondary">
             Close
