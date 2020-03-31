@@ -82,7 +82,15 @@ function Profile(props) {
   const {
     classes,
     user: {
-      credentials: { handle, createdAt, imageUrl, bio, website, location },
+      credentials: {
+        handle,
+        createdAt,
+        imageUrl,
+        bio,
+        website,
+        location,
+        navColor
+      },
       loading,
       authenticated
     }
@@ -149,6 +157,9 @@ function Profile(props) {
             </MuiLink>
             <hr />
             {bio && <Typography varient="body2">{bio}</Typography>}
+            <hr />
+            <hr />
+            {navColor && <Typography varient="body2">{navColor}</Typography>}
             <hr />
             {location && (
               <Fragment>

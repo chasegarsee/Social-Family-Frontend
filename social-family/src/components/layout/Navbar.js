@@ -19,10 +19,8 @@ import Button from "@material-ui/core/Button";
 import HomeIcon from "@material-ui/icons/Home";
 import CreatePost from "../post/CreatePost";
 import CachedIcon from "@material-ui/icons/Cached";
-import axios from "axios";
 
 function Navbar(props) {
-  const [color, setColor] = useState("");
   const {
     authenticated,
     refreshPage,
@@ -31,9 +29,7 @@ function Navbar(props) {
     }
   } = props;
 
-  const mapUserDetailsToState = credentials => {
-    setColor(credentials.navColor ? credentials.navColor : "");
-  };
+  console.log("NAV COLOR IN NAV BAR", navColor);
 
   return (
     <AppBar style={{ backgroundColor: navColor }}>

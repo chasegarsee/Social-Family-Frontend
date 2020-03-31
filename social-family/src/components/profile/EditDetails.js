@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { SketchPicker } from "react-color";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { editUserDetails } from "../../redux/actions/userActions";
@@ -25,6 +26,7 @@ function EditDetails(props) {
   const [bio, setBio] = useState("");
   const [website, setWebsite] = useState("");
   const [location, setLocation] = useState("");
+  const [navColor, setNavColor] = useState("");
   const [open, setOpen] = useState(false);
 
   const { classes, credentials } = props;
@@ -33,8 +35,10 @@ function EditDetails(props) {
     setBio(credentials.bio ? credentials.bio : "");
     setWebsite(credentials.website ? credentials.website : "");
     setLocation(credentials.location ? credentials.location : "");
+    setNavColor(credentials.navColor ? credentials.navColor : "");
   };
 
+  console.log("CREDS", credentials);
   useEffect(() => {
     mapUserDetailsToState(credentials);
   }, []);
@@ -61,15 +65,28 @@ function EditDetails(props) {
     setLocation(e.target.value);
   };
 
+  const handleFakeNavColorChange = e => {
+    e.preventDefault();
+    setNavColor(e.target.value);
+  };
+
+  // const handleNavColorChange = color => {
+  //   console.log("HEX COLOR", color.hex);
+  //   setNavColor(color.hex);
+  // };
+
   const handleSubmit = () => {
     const userDetails = {
       bio,
       website,
-      location
+      location,
+      navColor
     };
     props.editUserDetails(userDetails);
     handleClose();
   };
+
+  console.log("NAV COLOR", navColor);
 
   return (
     <Fragment>
@@ -114,8 +131,19 @@ function EditDetails(props) {
               fullWidth
               className={classes.textField}
             />
+            <TextField
+              name="navColor"
+              type="text"
+              lable="navColor"
+              placeholder="Where you live"
+              value={navColor}
+              onChange={handleFakeNavColorChange}
+              fullWidth
+              className={classes.textField}
+            />
           </form>
         </DialogContent>
+        {/* <SketchPicker color={navColor} onChange={handleNavColorChange} /> */}
         <DialogActions>
           <Button onClick={handleClose} varient="" color="secondary">
             Close
