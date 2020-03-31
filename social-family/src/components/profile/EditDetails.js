@@ -70,10 +70,10 @@ function EditDetails(props) {
     setNavColor(e.target.value);
   };
 
-  // const handleNavColorChange = color => {
-  //   console.log("HEX COLOR", color.hex);
-  //   setNavColor(color.hex);
-  // };
+  const handleNavColorChange = color => {
+    console.log("HEX COLOR", color.hex);
+    setNavColor(color.hex);
+  };
 
   const handleSubmit = () => {
     const userDetails = {
@@ -143,7 +143,7 @@ function EditDetails(props) {
             />
           </form>
         </DialogContent>
-        {/* <SketchPicker color={navColor} onChange={handleNavColorChange} /> */}
+        <SketchPicker color={navColor} onChange={handleNavColorChange} />
         <DialogActions>
           <Button onClick={handleClose} varient="" color="secondary">
             Close
