@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { SketchPicker } from "react-color";
+import { SliderPicker } from "react-color";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { editUserDetails } from "../../redux/actions/userActions";
@@ -144,7 +144,7 @@ function EditDetails(props) {
           </form>
         </DialogContent>
         <div style={{ padding: "20px" }}>
-          <SketchPicker color={navColor} onChange={handleNavColorChange} />
+          <SliderPicker color={navColor} onChange={handleNavColorChange} />
         </div>
         <DialogActions>
           <Button onClick={handleClose} varient="" color="secondary">
