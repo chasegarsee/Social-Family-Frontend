@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 /* MUI */
 import withStyles from "@material-ui/core/styles/withStyles";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 const styles = {
@@ -63,7 +62,7 @@ function Comments(props) {
                       variant="h6"
                       component={Link}
                       to={`/users/${userHandle}`}
-                      color="primary"
+                      style={{ color: props.navColor }}
                     >
                       {userHandle}
                     </Typography>

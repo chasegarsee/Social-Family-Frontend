@@ -56,7 +56,7 @@ function Post(props) {
     },
     user: {
       authenticated,
-      credentials: { handle }
+      credentials: { handle, navColor }
     }
   } = props;
 
@@ -83,7 +83,7 @@ function Post(props) {
           varient="h5"
           component={Link}
           to={`/users/${userHandle}`}
-          color="primary"
+          style={{ color: navColor }}
         >
           {userHandle}
         </Typography>
@@ -111,7 +111,7 @@ function Post(props) {
           </div>
         ) : null}
 
-        <LikeButton postId={postId} />
+        <LikeButton navColor={navColor} postId={postId} />
         <span>{likeCount}</span>
         <MyButton tip="Comments">
           <PostDialogWithChat
@@ -123,6 +123,7 @@ function Post(props) {
 
         <span>{commentCount}</span>
         <PostDialog
+          navColor={navColor}
           postId={postId}
           userHandle={userHandle}
           openDialog={props.openDialog}

@@ -57,7 +57,7 @@ const styles = theme => ({
 function StaticProfile(props) {
   const {
     classes,
-    profile: { handle, createdAt, imageUrl, bio, website, location }
+    profile: { handle, createdAt, imageUrl, bio, website, location, navColor }
   } = props;
   return (
     <Paper className={classes.paper}>
@@ -70,7 +70,7 @@ function StaticProfile(props) {
           <MuiLink
             component={Link}
             to={`/users/${handle}`}
-            color="primary"
+            style={{ color: navColor }}
             varient="h5"
           >
             @{handle}
@@ -80,21 +80,26 @@ function StaticProfile(props) {
           <hr />
           {location && (
             <Fragment>
-              <LocationOn color="primary" /> <span>{location}</span>
+              <LocationOn style={{ color: navColor }} /> <span>{location}</span>
               <hr />
             </Fragment>
           )}
           {website && (
             <Fragment>
-              <LinkIcon color="primary" />
-              <a href={website} target="_blank" rel="noopener noreferrer">
+              <LinkIcon style={{ color: navColor }} />
+              <a
+                style={{ color: navColor }}
+                href={website}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {" "}
                 {website}
               </a>
               <hr />
             </Fragment>
           )}
-          <CalendarToday color="primary" />{" "}
+          <CalendarToday style={{ color: navColor }} />{" "}
           <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
         </div>
       </div>

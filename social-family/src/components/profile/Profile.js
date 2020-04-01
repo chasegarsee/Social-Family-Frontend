@@ -142,7 +142,7 @@ function Profile(props) {
               onClick={handleEditPhoto}
               btnClassName="button"
             >
-              <EditIcon color="primary" />
+              <EditIcon style={{ color: navColor }} />
             </MyButton>
           </div>
           <hr />
@@ -150,7 +150,7 @@ function Profile(props) {
             <MuiLink
               component={Link}
               to={`/users/${handle}`}
-              color="primary"
+              style={{ color: navColor }}
               varient="h5"
             >
               @{handle}
@@ -158,32 +158,35 @@ function Profile(props) {
             <hr />
             {bio && <Typography varient="body2">{bio}</Typography>}
             <hr />
-            <hr />
-            {navColor && <Typography varient="body2">{navColor}</Typography>}
-            <hr />
             {location && (
               <Fragment>
-                <LocationOn color="primary" /> <span>{location}</span>
+                <LocationOn style={{ color: navColor }} />{" "}
+                <span>{location}</span>
                 <hr />
               </Fragment>
             )}
             {website && (
               <Fragment>
-                <LinkIcon color="primary" />
-                <a href={website} target="_blank" rel="noopener noreferrer">
+                <LinkIcon style={{ color: navColor }} />
+                <a
+                  style={{ color: navColor }}
+                  href={website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {" "}
                   {website}
                 </a>
                 <hr />
               </Fragment>
             )}
-            <CalendarToday color="primary" />{" "}
+            <CalendarToday style={{ color: navColor }} />{" "}
             <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
           </div>
           <MyButton tip="Logout" onClick={handleLogout}>
             <KeyboardReturn color="primary" />
           </MyButton>
-          <EditDetails />
+          <EditDetails navColor={navColor} />
         </div>
       </Paper>
     ) : (
@@ -193,7 +196,7 @@ function Profile(props) {
           <div className={classes.buttons}>
             <Button
               variant="contained"
-              color="primary"
+              style={{ color: navColor }}
               component={Link}
               to="/login"
             >

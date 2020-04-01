@@ -31,16 +31,16 @@ function LikeButton(props) {
   const likeButton = !authenticated ? (
     <Link to="/login">
       <MyButton tip="Like">
-        <FavoriteBorder color="primary" />
+        <FavoriteBorder style={{ color: props.navColor }} />
       </MyButton>
     </Link>
   ) : likedPost() ? (
     <MyButton tip="Undo Like" onClick={unlikePost}>
-      <FavoriteIcon color="primary" />
+      <FavoriteIcon style={{ color: props.navColor }} />
     </MyButton>
   ) : (
     <MyButton tip="Like Post" onClick={likePost}>
-      <FavoriteBorder color="primary" />
+      <FavoriteBorder style={{ color: props.navColor }} />
     </MyButton>
   );
   return likeButton;

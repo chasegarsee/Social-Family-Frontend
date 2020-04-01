@@ -6,7 +6,6 @@ import MyButton from "../../util/MyButton";
 /* MUI */
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import CardMedia from "@material-ui/core/CardMedia";
 /* ICONS */
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
