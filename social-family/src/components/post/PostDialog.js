@@ -153,7 +153,7 @@ function PostDialog(props) {
           <Typography
             style={{ marginLeft: 10 }}
             component={Link}
-            color="primary"
+            style={{ color: props.navColor }}
             varient="h5"
             to={`/users/${userHandle}`}
           >
@@ -186,7 +186,7 @@ function PostDialog(props) {
       </div>
       {likedBy}
       <CommentForm postId={postId} />
-      <Comments comments={comments} />
+      <Comments navColor={props.navColor} comments={comments} />
     </div>
   );
   return (
@@ -196,7 +196,7 @@ function PostDialog(props) {
         tip="Expand Post"
         tipClassName={classes.expandButton}
       >
-        <UnfoldMore color="primary" />
+        <UnfoldMore style={{ color: props.navColor }} />
       </MyButton>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <MyButton

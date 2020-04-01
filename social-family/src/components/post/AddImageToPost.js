@@ -14,7 +14,7 @@ const styles = theme => ({
     top: 1
   },
   addIcon: {
-    color: "#26c6da"
+    color: "#202020"
   }
 });
 

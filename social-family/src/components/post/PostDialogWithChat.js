@@ -121,7 +121,7 @@ function PostDialogWithChat(props) {
       <Grid item sm={7}>
         <Typography
           component={Link}
-          color="primary"
+          style={{ color: props.navColor }}
           varient="h5"
           to={`/users/${userHandle}`}
         >

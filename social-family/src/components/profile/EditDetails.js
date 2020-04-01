@@ -95,7 +95,7 @@ function EditDetails(props) {
         onClick={handleOpen}
         btnClassName={classes.button}
       >
-        <EditIcon color="primary" />
+        <EditIcon style={{ color: navColor }} />
       </MyButton>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>Edit Your Details</DialogTitle>
