@@ -32,7 +32,7 @@ import axios from "axios";
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: red[800] },
+    primary: { main: "#333333" },
     secondary: { main: "#202020" }
   },
   form: {

@@ -1,47 +1,48 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { getPosts } from "../redux/actions/dataActions";
-import PropTypes from "prop-types";
-import Post from "../components/post/Post";
-import Profile from "../components/profile/Profile";
+import React, { useEffect } from "react"
+import { connect } from "react-redux"
+import { getPosts } from "../redux/actions/dataActions"
+import PropTypes from "prop-types"
+import Post from "../components/post/Post"
+import Profile from "../components/profile/Profile"
+import SkelPost from "../components/skeleton/SkelPost"
 
 /* MUI */
-import LinearProgress from "@material-ui/core/LinearProgress";
-import Grid from "@material-ui/core/Grid";
-import withStyles from "@material-ui/core/styles/withStyles";
-import Stories from "../components/layout/FamilyStories";
+import LinearProgress from "@material-ui/core/LinearProgress"
+import Grid from "@material-ui/core/Grid"
+import withStyles from "@material-ui/core/styles/withStyles"
+import Stories from "../components/layout/FamilyStories"
 
-const styles = theme => ({
+const styles = (theme) => ({
   profileCenter: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: 300
+    minHeight: 300,
   },
   root: {
     width: "100%",
     "& > * + *": {
-      marginTop: theme.spacing(2)
-    }
-  }
-});
+      marginTop: theme.spacing(2),
+    },
+  },
+})
 
 function Home(props) {
-  const { classes } = props;
+  const { classes } = props
 
   useEffect(() => {
-    props.getPosts();
-  }, []);
+    props.getPosts()
+  }, [])
 
-  const { posts, loading } = props.data;
+  const { posts, loading } = props.data
 
   let recentPostMarkup = !loading ? (
-    posts.map(post => <Post key={post.postId} post={post} />)
+    posts.map((post) => <Post key={post.postId} post={post} />)
   ) : (
     <div className={classes.root}>
-      <LinearProgress color="secondary" />
+      <SkelPost />
     </div>
-  );
+  )
 
   return (
     <div>
@@ -55,16 +56,16 @@ function Home(props) {
         </Grid>
       </Grid>
     </div>
-  );
+  )
 }
 
 Home.propTypes = {
   getPosts: PropTypes.func.isRequired,
-  data: PropTypes.object.isRequired
-};
+  data: PropTypes.object.isRequired,
+}
 
-const mapStateToProps = state => ({
-  data: state.data
-});
+const mapStateToProps = (state) => ({
+  data: state.data,
+})
 
-export default connect(mapStateToProps, { getPosts })(withStyles(styles)(Home));
+export default connect(mapStateToProps, { getPosts })(withStyles(styles)(Home))
