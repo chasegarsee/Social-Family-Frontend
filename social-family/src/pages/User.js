@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import axios from "axios"
 import Post from "../components/post/Post"
 import Grid from "@material-ui/core/Grid"
-import LinearProgress from "@material-ui/core/LinearProgress"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import { connect } from "react-redux"
 import { getUserData } from "../redux/actions/dataActions"
@@ -43,6 +42,7 @@ function User(props) {
       await setProfile(res.data.user)
     }
     setUserProfile()
+    // eslint-disable-next-line
   }, [])
 
   const postsMarkup = loading ? (
