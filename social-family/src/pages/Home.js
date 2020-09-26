@@ -7,10 +7,10 @@ import Profile from "../components/profile/Profile"
 import SkelPost from "../components/skeleton/SkelPost"
 
 /* MUI */
-import LinearProgress from "@material-ui/core/LinearProgress"
+
 import Grid from "@material-ui/core/Grid"
 import withStyles from "@material-ui/core/styles/withStyles"
-import Stories from "../components/layout/FamilyStories"
+// import Stories from "../components/layout/FamilyStories"
 
 const styles = (theme) => ({
   profileCenter: {
@@ -32,6 +32,7 @@ function Home(props) {
 
   useEffect(() => {
     props.getPosts()
+    // eslint-disable-next-line
   }, [])
 
   const { posts, loading } = props.data

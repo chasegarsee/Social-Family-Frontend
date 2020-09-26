@@ -1,15 +1,10 @@
-import React, { Fragment } from "react"
+import React from "react"
 
 import MyButton from "../../util/MyButton"
 /* MUI */
 import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
-import MuiLink from "@material-ui/core/Link"
-import EditIcon from "@material-ui/icons/Edit"
 
-import LocationOn from "@material-ui/icons/LocationOn"
-import LinkIcon from "@material-ui/icons/Link"
-import CalendarToday from "@material-ui/icons/CalendarToday"
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn"
 
 import EditDetails from "../profile/EditDetails"

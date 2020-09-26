@@ -1,35 +1,34 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react"
 
-import MyButton from "../../util/MyButton";
-import { Link } from "react-router-dom";
-import Notifications from "./Notifications";
+import MyButton from "../../util/MyButton"
+import { Link } from "react-router-dom"
+import Notifications from "./Notifications"
 
 /* REDUX */
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { editUserDetails } from "../../redux/actions/userActions";
+import { connect } from "react-redux"
+import PropTypes from "prop-types"
+import { editUserDetails } from "../../redux/actions/userActions"
 
 /* Material UI */
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import Button from "@material-ui/core/Button"
 
 /* ICON */
 
-import HomeIcon from "@material-ui/icons/Home";
-import CreatePost from "../post/CreatePost";
-import CachedIcon from "@material-ui/icons/Cached";
+import HomeIcon from "@material-ui/icons/Home"
+import CreatePost from "../post/CreatePost"
+// import CachedIcon from "@material-ui/icons/Cached"
+import ChatIcon from "@material-ui/icons/Chat"
 
 function Navbar(props) {
   const {
     authenticated,
-    refreshPage,
+    // refreshPage,
     user: {
-      credentials: { navColor }
-    }
-  } = props;
-
-  console.log("NAV COLOR IN NAV BAR", navColor);
+      credentials: { navColor },
+    },
+  } = props
 
   return (
     <AppBar style={{ backgroundColor: navColor }}>
@@ -43,6 +42,11 @@ function Navbar(props) {
               </MyButton>
             </Link>
             <Notifications />
+            <Link to="/chat">
+              <MyButton tip="Chat with friends">
+                <ChatIcon />
+              </MyButton>
+            </Link>
           </Fragment>
         ) : (
           <Fragment>
@@ -57,23 +61,23 @@ function Navbar(props) {
             </Button>
           </Fragment>
         )}
-        <MyButton tip="Refresh Content" onClick={refreshPage}>
+        {/* <MyButton tip="Refresh Content" onClick={refreshPage}>
           <CachedIcon />
-        </MyButton>
+        </MyButton> */}
       </Toolbar>
     </AppBar>
-  );
+  )
 }
 
 Navbar.propTypes = {
   editUserDetails: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool.isRequired
-};
+  authenticated: PropTypes.bool.isRequired,
+}
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
   credentials: state.user.credentials,
-  authenticated: state.user.authenticated
-});
+  authenticated: state.user.authenticated,
+})
 
-export default connect(mapStateToProps, { editUserDetails })(Navbar);
+export default connect(mapStateToProps, { editUserDetails })(Navbar)
