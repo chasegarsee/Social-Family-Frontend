@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
+import "../../styles/chatStyles.css"
 
 function ChatMessage(props) {
   const {
@@ -10,17 +11,19 @@ function ChatMessage(props) {
       authenticated,
     },
   } = props
-  const { text, uid, imageUrl } = props.message
+  const { text, imageUrl } = props.message
 
-  const messageClass = uid === userId ? "sent" : "recieved"
+  console.log("USER IDS", props.message.userId, userId)
+
+  const messageClass = props.message.userId === userId ? "sent" : "received"
 
   return (
-    <div className={`message ${messageClass}`}>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <img style={{ width: 50, height: 50, borderRadius: "50%" }} src={imageUrl} />
-        <p style={{ marginLeft: "1%" }}>{text}</p>
+    <>
+      <div className={`message ${messageClass}`}>
+        <img src={imageUrl} />
+        <p style={messageClass === "sent" ? { backgroundColor: navColor } : {}}>{text}</p>
       </div>
-    </div>
+    </>
   )
 }
 

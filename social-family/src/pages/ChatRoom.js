@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import ChatMessage from "../components/chat/ChatMessage"
 import firebase from "../firebase"
+import "../styles/chatStyles.css"
 
 import { useCollectionData } from "react-firebase-hooks/firestore"
 
@@ -27,9 +28,6 @@ function ChatRoom(props) {
   const [banned] = useCollectionData(bannedRef, { idField: "id" })
   const [isBanned, setIsBanned] = useState(false)
 
-  console.log(banned)
-  console.log(userId)
-
   useEffect(() => {
     if (banned) {
       const result = banned.filter((user) => user.id == userId)
@@ -37,8 +35,6 @@ function ChatRoom(props) {
       if (result.length > 0) setIsBanned(true)
     }
   }, [banned])
-
-  console.log(isBanned)
 
   const scrollMe = useRef()
 
@@ -56,11 +52,15 @@ function ChatRoom(props) {
 
   return (
     <>
-      <div>{messages && messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}</div>
-      <div ref={scrollMe}></div>
-      <form onSubmit={sendMessage}>
+      <main>
+        <div>{messages && messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}</div>
+        <span ref={scrollMe}></span>
+      </main>
+      <form className="chat-form" onSubmit={sendMessage}>
         <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
-        <button disabled={isBanned}>Submit Message</button>
+        <button style={{ backgroundColor: navColor }} disabled={isBanned || !formValue}>
+          Send
+        </button>
       </form>
     </>
   )
